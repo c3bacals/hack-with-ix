@@ -50,6 +50,7 @@ renderModal(condition){
   	alert("Mystate is: " + input);
   	 this.state.showComponent_mod = false;
      this.forceUpdate();
+     this.props.getOutput(input);
 
 
   }
