@@ -22,7 +22,7 @@ export class ButtonMain extends Component {
   }
 
   clicked(){
-
+    alert("HARRO DURR")
 
   }
 
@@ -45,7 +45,7 @@ export class ButtonMain extends Component {
 
     return (
       <div >
-        <button type="button" className="btn btn-default"  onClick={ () => {this.props.changeState(this.props.say)}}>{this.props.say}</button>
+        <button type="button" className="btn btn-primary" dataDismiss={this.props.data} onClick={ () => {this.props.changeState(this.props.say)}}>{this.props.say}</button>
       </div>    
     )
   }
@@ -66,9 +66,9 @@ export class HandleButton extends Component {
   }
 
 
-  renderButton(input, condition){
+  renderButton(input, condition, input2){
     if(condition == true)
-    return <ButtonMain say={input} changeState={this.changeState.bind(this)}/>
+    return <ButtonMain say={input} changeState={this.changeState.bind(this)} data={input2}/>
 
 
 
@@ -105,10 +105,10 @@ export class HandleButton extends Component {
           <Center>
             <Row>
               <div>
-                {this.renderButton("By Format", this.state.showComponent_Main1)}
+                {this.renderButton("By Format", this.state.showComponent_Main1, "null")}
               </div>
               <div style={{marginLeft: '10px'}}>
-                {this.renderButton("By Platform", this.state.showComponent_Main2)}
+                {this.renderButton("By Platform", this.state.showComponent_Main2, "null")}
               </div>
               
             </Row>
@@ -120,10 +120,10 @@ export class HandleButton extends Component {
         <Row>
           <Center>
             <div>
-              {this.renderButton("Video", this.state.showComponent_A1)}
+              {this.renderButton("Video", this.state.showComponent_A1, "Modal")}
             </div>
             <div style={{marginLeft: '10px'}}>
-              {this.renderButton("Banner", this.state.showComponent_A1)}
+              {this.renderButton("Banner", this.state.showComponent_A1, "Modal")}
             </div>
           </Center>
         </Row>
@@ -131,13 +131,13 @@ export class HandleButton extends Component {
         <Row>
           <Center>
             <div>
-              {this.renderButton("Desktop", this.state.showComponent_B1)}
+              {this.renderButton("Desktop", this.state.showComponent_B1, "Modal")}
             </div>
             <div style={{marginLeft: '10px'}}>
-              {this.renderButton("Mobile", this.state.showComponent_B1)}
+              {this.renderButton("Mobile", this.state.showComponent_B1, "Modal")}
             </div>
             <div style={{marginLeft: '10px'}}>
-              {this.renderButton("App", this.state.showComponent_B1)}
+              {this.renderButton("App", this.state.showComponent_B1, "Modal")}
             </div>
           </Center>
         </Row>
