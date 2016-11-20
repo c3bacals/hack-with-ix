@@ -22,7 +22,7 @@ export default class App extends Component {
   }
 
   getOutput(output){
-    alert("MY OUTPUT IS: " + output)
+    //alert("MY OUTPUT IS: " + output)
     if(output == "Banner")
     this.state.outputAnswer = "banner";
   if(output == "Video")

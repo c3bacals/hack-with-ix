@@ -21,10 +21,7 @@ export class ButtonMain extends Component {
     super()
   }
 
-  clicked(){
-    alert("HARRO DURR")
-
-  }
+  
 
   render () {
 
@@ -77,7 +74,7 @@ export class HandleButton extends Component {
   changeState(myState){
     //return <Button say='HELLO' renderButton={this.renderButton.bind(this)}/>
     
-      alert(myState);
+     // alert(myState);
 
       if(myState == "By Format"){
         this.state.showComponent_Main2 = false;
