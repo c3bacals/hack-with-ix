@@ -18,6 +18,7 @@ export default class App extends Component {
     this.state = {
       showComponent_Main1: true,
       outputAnswer: "empty",
+      formatPlatform: "empty",
       
     };
   }
@@ -25,16 +26,35 @@ export default class App extends Component {
   getOutput(output){
     //alert("MY OUTPUT IS: " + output)
 
-    if(output == "Banner")
-    this.state.outputAnswer = "banner";
-  if(output == "Video")
+    if(output == "Banner"){
+      this.state.formatPlatform = "format";
+      this.state.outputAnswer = "banner";
+    }
+    
+  if(output == "Video"){
+
+    this.state.formatPlatform = "format";
     this.state.outputAnswer = "video";
-  if(output == "Desktop")
+  }
+    
+  if(output == "Desktop"){
+
+    this.state.formatPlatform = "platform";
     this.state.outputAnswer = "desktop";
-  if(output == "Mobile")
+  }
+    
+  if(output == "Mobile"){
+
+    this.state.formatPlatform = "platform";
     this.state.outputAnswer = "mobile";
-  if(output == "App")
+  }
+    
+  if(output == "App"){
+
+    this.state.formatPlatform = "platform";
     this.state.outputAnswer = "app";
+  }
+    
   
      this.forceUpdate();
 
@@ -43,7 +63,7 @@ export default class App extends Component {
 
   renderImpressions(){
     if(this.state.outputAnswer != "empty")
-    return <Impressions param={this.state.outputAnswer} style={{marginBottom: "0"}}/>
+    return <Impressions param={this.state.outputAnswer} formatOrPlatform= {this.state.formatPlatform} style={{marginBottom: "0"}}/>
 
 
 
