@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {LineChartWrapper, BarChartWrapper} from './Chart'
+import { Center } from 'components/Flex'
 
 var TestLineData = [{
   key: "Spend",
@@ -225,10 +226,23 @@ export class Impressions extends Component {
   render () {
 
      return (
-      <div style={{width: "100%"}}>
-        <LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
-        <BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
+      <Center >
+      <div style={{width: "85%"}}>
+      
+      <div className="panel panel-default">
+        <div className="panel-heading">Spend vs Hour</div>
+         <div className="panel-body"><LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
+        </div>
       </div>
+      
+         
+         <div className="panel panel-default">
+        <div className="panel-heading">Spend Versus Format/Platform</div>
+         <div className="panel-body"><BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
+      </div>
+      </div>
+      </div>
+      </Center>
       )
    }
   
