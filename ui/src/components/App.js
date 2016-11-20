@@ -25,6 +25,14 @@ export default class App extends Component {
     alert("MY OUTPUT IS: " + output)
     if(output == "Banner")
     this.state.outputAnswer = "banner";
+  if(output == "Video")
+    this.state.outputAnswer = "video";
+  if(output == "Desktop")
+    this.state.outputAnswer = "desktop";
+  if(output == "Mobile")
+    this.state.outputAnswer = "mobile";
+  if(output == "App")
+    this.state.outputAnswer = "app";
   
      this.forceUpdate();
 
@@ -44,7 +52,6 @@ export default class App extends Component {
         <div style={{width:"100%",height:"100%"}}>
         <MyHeader/>
         <ModalG getOutput={this.getOutput.bind(this)}/>
-        
         
         {this.renderImpressions()}
         

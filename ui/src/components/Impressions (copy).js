@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {LineChartWrapper, BarChartWrapper} from './Chart'
+import {LineChart, BarChart} from './Chart'
 
 var TestLineData = [{
   key: "Spend",
@@ -225,9 +225,9 @@ export class Impressions extends Component {
   render () {
 
      return (
-      <div style={{width: "100%"}}>
-        <LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
-        <BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
+      <div style={{width: "55%"}}>
+        <LineChart data={this.datafy(this.getTimeToCost())} x="hour" y="spend" />
+        <BarChart data={this.datafy(this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner"))} x="platform" y="spend" />
       </div>
       )
    }
