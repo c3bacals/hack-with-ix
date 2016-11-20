@@ -1,24 +1,25 @@
 // Dependencies
 
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+require('./tg-modal/dist/default.scss')
+
+
 
 // Components
 
 import { Center } from 'components/Flex'
-import ModalG from 'components/ModalG'
 
 
-export default class App extends Component {
-      constructor() {
+export default class ModalG extends Component {
+
+  constructor() {
       super()
     }
 
     render() {
+      
       return (
         <ModalG/>
       )
     }
   }
-
-  
