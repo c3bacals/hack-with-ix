@@ -19,9 +19,9 @@ export class BestEstimate extends Component {
   render() {
     return (
       <div className="jumbotron">
-        <p>Selected: By {this.props.formatOrPlatform} on a {this.props.outputAnswer} advertisement.</p>
-        <h3>Best Hour to Advertise: {this.convert24Hour(this.props.hour)}</h3>
-        <h3>Best {this.props.formatOrPlatform} to Advertise: </h3>
+        <p>For a {this.props.outputAnswer} advertisement, </p>
+        <h3>Best hour to advertise: {this.convert24Hour(this.props.bestHour)}</h3>
+        <h3>Best {this.props.formatOrPlatform} to advertise: {this.props.bestFormatOrPlatform}</h3>
       </div>
     );
   }

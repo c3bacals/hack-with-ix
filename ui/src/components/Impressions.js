@@ -222,10 +222,19 @@ export class Impressions extends Component {
 
   // <BarChart data={() => {this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "video")}} x="platform" y="spend" />
 
-  getBestFormatOrPlatform(formatOrPlatform) {
-    if (formatOrPlatform == "format") {
-      return this.getBestFormat(this.getFormatToCost(this.getBestHour(this.getTimeToCost())), this.props.param)
+  getBestFormatOrPlatform() {
+    var formatOrPlatform = this.props.formatOrPlatform
+    console.log("asdfasdfasdf:: " + formatOrPlatform)
+    console.log(this.props.param)
+    var bestFormat;
+    if (formatOrPlatform == "format"){
+      bestFormat =  this.getBestFormat(this.getFormatToCost(this.getBestHour(this.getTimeToCost()), this.props.param));
+
+    } else if (formatOrPlatform == "platform") {
+      bestFormat =  this.getBestPlatform(this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), this.props.param));
     }
+    console.log("bestFormat:: " + bestFormat)
+    return bestFormat;
   }
 
   render () {
