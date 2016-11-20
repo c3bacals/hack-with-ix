@@ -87,6 +87,7 @@ export class Impressions extends Component {
         hour = timeToCost[i]["hour"]
       }
     }
+    console.log("Best Hour:: " + hour)
     return hour
   }
 
@@ -104,7 +105,7 @@ export class Impressions extends Component {
           var input = impressionData[j].platform
         else
           var input = impressionData[j].format
-        if (impressionData[j].platform == param 
+        if (impressionData[j].platform == param
             || impressionData[j].format == param) {
           if (!(input in paramToCostDict)) {
             paramToCostDict[input] = []
@@ -137,26 +138,30 @@ export class Impressions extends Component {
 
   /* Return the best format or platform at the best hour */
   getBestParam(formatOrPlatform, paramToCost) {
+    console.log("fOP:: " + formatOrPlatform)
+    console.log("PTC:: " + paramToCost)
+    console.log(paramToCost)
     var mostSpend = 0;
     var param;
+    console.log("thing [i]::" + paramToCost[0].spend)
     for (var i = 0; i < paramToCost.length; i++) {
       if (paramToCost[i]["spend"] > mostSpend) {
-        mostSpend = paramToCost[i]["spend"]
+        mostSpend = paramToCost[i].spend
         if (formatOrPlatform == "format")
-          param = paramToCost[i]["format"]
+          param = paramToCost[i].format
         else
-          param = paramToCost[i]["platform"]
+          param = paramToCost[i].platform
       }
     }
-    console.log(param)
+    console.log("BESTPARAM!!!!" + param)
     return param
   }
 
   getXKey(formatPlatform) {
     var input;
-    if (formatPlatform == "format") 
-      input = "platform" 
-    else 
+    if (formatPlatform == "format")
+      input = "platform"
+    else
       input = "format"
     console.log("input", input)
     return input
@@ -182,20 +187,7 @@ export class Impressions extends Component {
 
   // <BarChart data={() => {this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "video")}} x="platform" y="spend" />
 
-  getBestFormatOrPlatform() {
-    var formatOrPlatform = this.props.formatOrPlatform
-    console.log("asdfasdfasdf:: " + formatOrPlatform)
-    console.log(this.props.param)
-    var bestFormat;
-    if (formatOrPlatform == "format"){
-      bestFormat =  this.getBestFormat(this.getFormatToCost(this.getBestHour(this.getTimeToCost()), this.props.param));
-
-    } else if (formatOrPlatform == "platform") {
-      bestFormat =  this.getBestPlatform(this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), this.props.param));
-    }
-    console.log("bestFormat:: " + bestFormat)
-    return bestFormat;
-  }
+// bestFormatOrPlatform={this.getBestParam(this.props.formatOrPlatform, this.getParamToCost(this.getBestHour(this.getTimeToCost(this.props.param)), this.props.formatOrPlatform, this.props.param))}
 
   render () {
 
@@ -203,7 +195,9 @@ export class Impressions extends Component {
       <Center >
 
         <div style={{width: "85%"}}>
-          <BestEstimate bestHour={this.getBestHour(this.getTimeToCost())} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param} bestFormatOrPlatform={this.getBestFormatOrPlatform(this.props.formatOrPlatform)}/>
+          <BestEstimate bestHour={this.getBestHour(this.getTimeToCost(this.props.param))} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param}
+
+          bestFormatOrPlatform={this.getBestParam(this.formatOrPlatform, [{"format":"something", "spend":321},{"format":"otherThing", "spend":654}])}/>
 
           <div className="panel panel-default">
             <div className="panel-heading">Spend vs Hour</div>
@@ -215,7 +209,7 @@ export class Impressions extends Component {
 
         <div className="panel panel-default">
           <div className="panel-heading">Spend Versus Format/Platform</div>
-          <div className="panel-body"><BarChartWrapper data={this.getParamToCost(this.getBestHour(this.getTimeToCost()), this.props.formatOrPlatform, this.props.param)} xKey={this.getXKey(this.props.formatOrPlatform)} yKey="spend" />
+          <div className="panel-body"><BarChartWrapper data={this.getParamToCost(this.getBestHour(this.getTimeToCost(this.props.param)), this.props.formatOrPlatform, this.props.param)} xKey={this.getXKey(this.props.formatOrPlatform)} yKey="spend" />
         </div>
       </div>
     </div>
