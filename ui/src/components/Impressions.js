@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {LineChartWrapper, BarChartWrapper} from './Chart'
 import {BestEstimate} from './BestEstimate'
+import { Center } from 'components/Flex'
 
 var TestLineData = [{
   key: "Spend",
@@ -18,27 +19,27 @@ export class Impressions extends Component {
     console.log("Refreshing ...");
 
     fetch('http://localhost:8000/impressions?dc=NA')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ impressionsNA: json.data})
-        console.log("NA")
-        console.log(this.state.impressionsNA)
-      })
-      .catch(err => { console.log('ERROR', err); });
+    .then(res => res.json())
+    .then(json => {
+      this.setState({ impressionsNA: json.data})
+      console.log("NA")
+      console.log(this.state.impressionsNA)
+    })
+    .catch(err => { console.log('ERROR', err); });
 
     fetch('http://localhost:8000/impressions?dc=EU')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ impressionsEU: json.data})
-      })
-      .catch(err => { console.log('ERROR', err); });
+    .then(res => res.json())
+    .then(json => {
+      this.setState({ impressionsEU: json.data})
+    })
+    .catch(err => { console.log('ERROR', err); });
 
     fetch('http://localhost:8000/impressions?dc=AS')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ impressionsAS: json.data})
-      })
-      .catch(err => { console.log('ERROR', err); });
+    .then(res => res.json())
+    .then(json => {
+      this.setState({ impressionsAS: json.data})
+    })
+    .catch(err => { console.log('ERROR', err); });
   }
 
   /* Get the average spend at each hour in the day */
@@ -88,7 +89,7 @@ export class Impressions extends Component {
   }
 
   /* Get the average spend of each platform based on format input
-     by the user during the best hour in the day */
+  by the user during the best hour in the day */
   getPlatformToCost(bestHour, format) {
     var platformToCostDict = {}
     var platformToCost = []
@@ -102,9 +103,9 @@ export class Impressions extends Component {
             platformToCostDict[platform] = []
             platformToCostDict[platform].push(impressionData[j].spend)
           } else {
-              var spendList = platformToCostDict[platform]
-              spendList.push(impressionData[j].spend)
-              platformToCostDict[platform] = spendList
+            var spendList = platformToCostDict[platform]
+            spendList.push(impressionData[j].spend)
+            platformToCostDict[platform] = spendList
           }
         }
       }
@@ -137,7 +138,7 @@ export class Impressions extends Component {
     return platform
   }
 
-    /* Get the average spend of each format during the best hour in the day */
+  /* Get the average spend of each format during the best hour in the day */
   getFormatToCost(bestHour, platform) {
     var formatToCostDict = {}
     var formatToCost = []
@@ -151,9 +152,9 @@ export class Impressions extends Component {
             formatToCostDict[format] = []
             formatToCostDict[format].push(impressionData[j].spend)
           } else {
-              var spendList = formatToCostDict[format]
-              spendList.push(impressionData[j].spend)
-              formatToCostDict[format] = spendList
+            var spendList = formatToCostDict[format]
+            spendList.push(impressionData[j].spend)
+            formatToCostDict[format] = spendList
           }
         }
       }
@@ -200,10 +201,10 @@ export class Impressions extends Component {
   componentWillMount() {
     console.log("componentWillMount ...");
     this.refresh()
-      // TestLineData[0]["values"] = [{"hour": 0, "value": 3234}]
-      // TestLineData[0]["values"] = this.getTimeToCost()
-      // console.log(this.getTimeToCost());
-      // console.log("testline",TestLineData)
+    // TestLineData[0]["values"] = [{"hour": 0, "value": 3234}]
+    // TestLineData[0]["values"] = this.getTimeToCost()
+    // console.log(this.getTimeToCost());
+    // console.log("testline",TestLineData)
   }
 
   // render () {
@@ -224,19 +225,33 @@ export class Impressions extends Component {
   getBestFormatOrPlatform(formatOrPlatform) {
     if (formatOrPlatform == "format") {
       return this.getBestFormat(this.getFormatToCost(this.getBestHour(this.getTimeToCost())), this.props.param)
-}
-}
+    }
+  }
 
   render () {
 
-     return (
-      <div style={{width: "100%"}}>
-        <BestEstimate bestHour={this.getBestHour(this.getTimeToCost())} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param} bestFormatOrPlatform={this.getBestFormatOrPlatform(this.props.formatOrPlatform)}/>
+    return (
+      <Center >
 
-        <LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
-        <BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
+        <div style={{width: "85%"}}>
+          <BestEstimate bestHour={this.getBestHour(this.getTimeToCost())} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param} bestFormatOrPlatform={this.getBestFormatOrPlatform(this.props.formatOrPlatform)}/>
+
+          <div className="panel panel-default">
+            <div className="panel-heading">Spend vs Hour</div>
+            <div className="panel-body"><LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
+          </div>
+
+        </div>
+
+
+        <div className="panel panel-default">
+          <div className="panel-heading">Spend Versus Format/Platform</div>
+          <div className="panel-body"><BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
+        </div>
       </div>
-      )
-   }
+    </div>
+  </Center>
+)
+}
 
 }
