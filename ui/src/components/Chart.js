@@ -156,7 +156,7 @@ export class LineChartWrapper extends Component {
     return (
       <ResponsiveContainer>
         <LineChart data={this.props.data} margin={{top: 30, right: 90, bottom: 30, left: 30}}>
-          <XAxis dataKey={this.props.xKey} label={this.props.yKey} />
+          <XAxis dataKey={this.props.xKey} label={this.props.xKey} />
           <YAxis label={this.props.yKey}/>
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
@@ -173,7 +173,7 @@ render() {
   return (
     <ResponsiveContainer>
       <BarChart data={this.props.data} margin={{top: 30, right: 90, bottom: 30, left: 30}}>
-        <XAxis dataKey={this.props.xKey} label={this.props.yKey} />
+        <XAxis dataKey={this.props.xKey} label={this.props.xKey} />
         <YAxis label={this.props.yKey}/>
         <CartesianGrid strokeDasharray="3 3"/>
         <Tooltip/>
