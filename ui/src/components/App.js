@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 // Components
 
@@ -23,6 +24,7 @@ export default class App extends Component {
 
   getOutput(output){
     //alert("MY OUTPUT IS: " + output)
+
     if(output == "Banner")
     this.state.outputAnswer = "banner";
   if(output == "Video")
@@ -41,7 +43,7 @@ export default class App extends Component {
 
   renderImpressions(){
     if(this.state.outputAnswer != "empty")
-    return <Impressions param={this.state.outputAnswer}/>
+    return <Impressions param={this.state.outputAnswer} style={{marginBottom: "0"}}/>
 
 
 
@@ -50,12 +52,23 @@ export default class App extends Component {
     render() {
       return (
         <div style={{width:"100%",height:"100%"}}>
-        <MyHeader/>
-        <ModalG getOutput={this.getOutput.bind(this)}/>
+         <MyHeader/>
         
-        {this.renderImpressions()}
+        <body style = {{height: "100%", margin: "0"}}>
+          <div className="content" style={{minHeight: "100%"}}>
+            <div className="content-inside" style={{padding: "20px", paddingBottom: "50px"}}>
+           
+            <ReactCSSTransitionGroup transitionName = "example"  transitionAppear = {true} transitionAppearTimeout = {500}
+               transitionEnter = {false} transitionLeave = {false}>
+            <ModalG getOutput={this.getOutput.bind(this)}/>
+             </ReactCSSTransitionGroup>
         
-        <MyFooter/>
+            {this.renderImpressions()}
+
+            </div>
+          </div>
+              <MyFooter style={{height: "50px", marginTop: "-50px"}}/>
+        </body>
         </div>
       )
     }
