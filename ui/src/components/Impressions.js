@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {LineChartWrapper, BarChartWrapper} from './Chart'
+import {BestEstimate} from './BestEstimate'
 
 var TestLineData = [{
   key: "Spend",
@@ -86,7 +87,7 @@ export class Impressions extends Component {
     return hour
   }
 
-  /* Get the average spend of each platform based on format input 
+  /* Get the average spend of each platform based on format input
      by the user during the best hour in the day */
   getPlatformToCost(bestHour, format) {
     var platformToCostDict = {}
@@ -220,16 +221,22 @@ export class Impressions extends Component {
 
   // <BarChart data={() => {this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "video")}} x="platform" y="spend" />
 
+  getBestFormatOrPlatform(formatOrPlatform) {
+    if (formatOrPlatform == "format") {
+      return this.getBestFormat(this.getFormatToCost(this.getBestHour(this.getTimeToCost())), this.props.param)
+}
+}
 
-  
   render () {
 
      return (
       <div style={{width: "100%"}}>
+        <BestEstimate bestHour={this.getBestHour(this.getTimeToCost())} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param} bestFormatOrPlatform={this.getBestFormatOrPlatform(this.props.formatOrPlatform)}/>
+
         <LineChartWrapper data={this.getTimeToCost()} xKey="hour" yKey="spend" />
         <BarChartWrapper data={this.getPlatformToCost(this.getBestHour(this.getTimeToCost()), "banner")} xKey="platform" yKey="spend" />
       </div>
       )
    }
-  
+
 }
