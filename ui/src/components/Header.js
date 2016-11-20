@@ -33,7 +33,7 @@ export class MyHeader extends Component {
       <Center>
         <div className="navbar-header">
           
-            <a className="navbar-brand" style={{ color: "white"}}>Team Back-End. Always looking out for your Back-End</a>
+            <a className="navbar-brand" style={{ color: "white"}}>Team Back-End</a>
          
           
         </div>
