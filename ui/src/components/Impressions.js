@@ -143,17 +143,16 @@ export class Impressions extends Component {
     console.log(paramToCost)
     var mostSpend = 0;
     var param;
-    console.log("thing [i]::" + paramToCost[0].spend)
+  
     for (var i = 0; i < paramToCost.length; i++) {
       if (paramToCost[i]["spend"] > mostSpend) {
         mostSpend = paramToCost[i].spend
         if (formatOrPlatform == "format")
-          param = paramToCost[i].format
-        else
           param = paramToCost[i].platform
+        else
+          param = paramToCost[i].format
       }
     }
-    console.log("BESTPARAM!!!!" + param)
     return param
   }
 
@@ -197,7 +196,7 @@ export class Impressions extends Component {
         <div style={{width: "85%"}}>
           <BestEstimate bestHour={this.getBestHour(this.getTimeToCost(this.props.param))} formatOrPlatform={this.props.formatOrPlatform} outputAnswer={this.props.param}
 
-          bestFormatOrPlatform={this.getBestParam(this.formatOrPlatform, [{"format":"something", "spend":321},{"format":"otherThing", "spend":654}])}/>
+          bestFormatOrPlatform={this.getBestParam(this.props.formatOrPlatform, this.getParamToCost(this.getBestHour(this.getTimeToCost(this.props.param)), this.props.formatOrPlatform, this.props.param))}/>
 
           <div className="panel panel-default">
             <div className="panel-heading">Spend vs Hour</div>

@@ -71,7 +71,7 @@ export default class App extends Component {
 
     render() {
       return (
-        <div style={{width:"100%",height:"100%"}}>
+        <div style={{width:"100%",height:"100%"}} >
          <MyHeader/>
         
         <body style = {{height: "100%", margin: "0"}}>
@@ -80,7 +80,7 @@ export default class App extends Component {
            
             <ReactCSSTransitionGroup transitionName = "example"  transitionAppear = {true} transitionAppearTimeout = {500}
                transitionEnter = {false} transitionLeave = {false}>
-            <ModalG getOutput={this.getOutput.bind(this)}/>
+                 <ModalG getOutput={this.getOutput.bind(this)}/>
              </ReactCSSTransitionGroup>
         
             {this.renderImpressions()}
