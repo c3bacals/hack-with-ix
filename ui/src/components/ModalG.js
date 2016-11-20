@@ -27,8 +27,8 @@ renderModal(condition){
     
     	return(
     	
-    		<div className="static-modal">
-                <Modal.Dialog>
+    		<div className="static-modal" >
+                <Modal.Dialog style={{top: "25%", outline: "none"}}>
                     <Modal.Header>
                         <Modal.Title>How would you like to advertise your product ?</Modal.Title>
                     </Modal.Header>
